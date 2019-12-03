@@ -1,0 +1,110 @@
+﻿@using MyEverNote.WEBUI.Models
+@using MyEverNote.Entities
+@model Note
+@{
+    ViewBag.Title = "Note1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+
+    EverNoteUser user = CurrentSession.CurrentUser;
+}
+
+<link href="~/Content/css/css/app.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-1">
+
+    </div>
+    <article class="card mb-4 col-md-8 ">
+        <header class="card-header text-center">
+            <div class="card-meta">
+                <a href="#"><time class="timeago" datetime="2017-10-26 20:00">@Model.CreatedOn</time></a> in <p>@Model.Category.Title</p>
+            </div>
+            <a href="#">
+                <h1 class="card-title ">@Model.Title</h1>
+            </a>
+        </header>
+        <div>
+            <img class="card-img" src="~/Images/@Model.NoteImageFilename " style="max-height:450px;max-width:850px;" alt="" />
+        </div>
+        <div class="card-body">
+
+            @Model.Text
+
+            @*<div class="row">
+                    <div class="col-md-4">
+                        <ul>
+                            <li>Donec quam felis</li>
+                            <li>Consectetuer adipiscing</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul>
+                            <li>Donec quam felis</li>
+                            <li>Consectetuer adipiscing</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul>
+                            <li>Donec quam felis</li>
+                            <li>Consectetuer adipiscing</li>
+                        </ul>
+                    </div>
+                </div>*@
+
+
+
+            <hr />
+
+
+
+            <p class="pull-right">
+                <button class="btn btn-info" value="" data-toggle="modal" data-target="#modal_comment" data-note-id="@Model.Id">
+                    <span class="glyphicon glyphicon-comment"> </span> Yorumlar  <span class=" badge badge-pill badge-warning">@Model.Comments.Count() </span>
+
+                </button>
+            </p>
+
+            <p class="pull-right">
+                @if (user != null)
+                {
+                    <button class="btn btn-danger" data-liked="false" data-note-id="@Model.Id">
+                        <span class="glyphicon glyphicon-star-empty like-star"></span>&nbsp; <span class="like-count">@Model.LikeCount </span>
+                    </button>
+                }
+
+
+
+
+            </p>
+
+            <div class="mt-5">
+                <h5>Write a response</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Your name">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Your email">
+                    </div>
+                </div>
+                <textarea class="form-control mt-3" rows="3" placeholder="Write a response.."></textarea>
+                <a href="#" class="btn btn-success mt-3">Yayınla</a>
+            </div>
+
+        </div>
+    </article>
+    <div class="col-md-2">
+        @Html.Partial("_PartialCategories2")
+      
+    </div>
+   
+</div>
+
+@Bootsrap.Model(id: "modal_comment", title: "Yorumlar")
+<script src="~/Scripts/jquery.js"></script>
+<script src="~/Scripts/app.js"></script>
+<script src="~/Scripts/Comment.js"></script>
+<script src="~/Scripts/Liked.js"></script>
+<script src="~/Scripts/Note.js"></script>

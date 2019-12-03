@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Hata";
+}
+
+
+
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-4">
+
+
+
+        @{
+            Exception ex = null;
+            if (TempData["LastError"] != null)
+            {
+
+                ex = TempData["LastError"] as Exception;
+            }
+
+
+        }
+
+        <h4 class="text-capitalize"><span class="glyphicon glyphicon-remove-circle text-danger"></span> Hata Oluştu </h4>
+        <br /><br />
+        @if (ex != null)
+        {
+            <strong>Hata Detayı: </strong>
+
+            @ex.Message
+            <br /><br />
+        }
+
+    </div>
+
+    <div class="col-md-8 col-md-offset-6">
+        <a href="/Home/Index" class="btn btn-warning">Anasayfaya Git</a>
+    </div>
+
+</div>
+

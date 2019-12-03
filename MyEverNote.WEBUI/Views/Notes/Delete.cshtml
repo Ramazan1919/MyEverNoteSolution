@@ -1,0 +1,65 @@
+﻿@model MyEverNote.Entities.Note
+
+@{
+    ViewBag.Title = "Sil";
+}
+
+
+
+
+<div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-5 ">
+        <br />
+        <h3 class="text-danger">Silmek İstediğinize Emin Misiniz ?</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Category.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Text)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Text)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsDraft)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsDraft)
+            </dd>
+
+
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="SİL" class="btn btn-danger" /> |
+                @Html.ActionLink("Not Listesine Dön", "Index",null,new { @class="btn btn-success"})
+            </div>
+        }
+    </div>
+   
+</div>

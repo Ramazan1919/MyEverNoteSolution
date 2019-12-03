@@ -1,0 +1,37 @@
+﻿
+@using MyEverNote.BusınessLayer
+@using MyEverNote.Entities
+@using MyEverNote.WEBUI.Models
+@{ 
+
+   
+    List<Category> list = Cache_Helper.GetCategoriesFromCache();
+}
+
+
+
+
+    @*@Html.ActionLink("Tümü", "Index", "Home", null, new { @class = "list-group-item" })*@
+    @*<a href="Home/Index" class="list-group-item"><span class="glyphicon glyphicon-book"></span>Tümü</a>*@
+
+
+
+   
+        <div class="list-group">
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Kategoriler</h4>
+            @foreach (Category cat in list)
+            {
+                <a class="btn btn-light btn-sm mb-1" title="@cat.Description" href="/Home/ByCategory/@cat.Id">  @cat.Title</a>
+            }
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+

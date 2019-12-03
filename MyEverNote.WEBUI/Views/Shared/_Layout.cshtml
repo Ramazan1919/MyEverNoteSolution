@@ -1,0 +1,242 @@
+﻿@using MyEverNote.Entities
+@using MyEverNote.WEBUI.Models
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Bootstrap 4 Magazine/Blog Theme">
+    <meta name="author" content="Bootlab">
+
+    <title>MY BLOG</title>
+    <link href="~/Content/css/css/app.css" rel="stylesheet" />
+    @*<link href="~/Content/css/css/style.css" rel="stylesheet" />*@
+
+    <link href="~/Content/css/css/font-awesome.min.css" rel="stylesheet" />
+    @*<link href="~/Content/css/css/purple.css" rel="stylesheet" />*@
+    @*<link href="~/content/css/css/style.css" rel="stylesheet" />*@
+    @*<link href="~/Content/css/css/mediaelementplayer.min.css" rel="stylesheet" />*@
+</head>
+<body   >
+    @{
+
+        EverNoteUser everNoteUser = CurrentSession.CurrentUser;
+    }
+    <header role="banner" >
+        <nav class="navbar navbar-expand-md navbar-light bg-white  navbar-fixed-top" >
+            <div class="container container-fluid" >
+
+                <button class="navbar-toggler order-2 order-md-1" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse order-2 order-md-1" id="navbar">
+                    <ul class="nav navbar-nav mr-auto">
+                        @*<li class="nav-item">
+                            <a href="/Home/Index" class="nav-link active">
+                                <span class="glyphicon glyphicon-heart"></span><h4 class="">Anasayfa</h4>
+                            </a>
+                        </li>*@
+                        @if (everNoteUser != null && everNoteUser.IsAdmın)
+                        {
+                            <li class="nav-item dropdown">
+
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown_management" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Toggle navigation">
+                                    Yönetim
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown_management">
+                                    <a href="/Notes/Create" class="dropdown-item glyphicon glyphicon-plus"><span>Not Ekle </span></a>
+                                    <a href="/Notes/Index" class="dropdown-item glyphicon glyphicon-th-list"><span>Notlarm </span></a>
+                                    <a href="/Note/MyLikedNotes" class="dropdown-item glyphicon glyphicon-th-list"><span>Beğendiklerim </span></a>
+                                    <hr />
+                                    <a href="/Categories/Create" class="dropdown-item glyphicon glyphicon-th-list"><span>Kategori Ekle </span></a>
+                                    <a href="/Categories/Index" class="dropdown-item glyphicon glyphicon-th-list"><span>Kategoriler </span></a>
+                                    <hr />
+                                    <a href="/EverNoteUser/Create" class="dropdown-item glyphicon glyphicon-th-list"><span>Kullanıcı Ekle </span></a>
+                                    <a href="/EverNoteUser/Index" class="dropdown-item glyphicon glyphicon-th-list"><span>Kullanıcılar </span></a>
+                                </div>
+                            </li>
+                        }
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/MostLiked">En Beğenilenler</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Index">Son Yazılanlar</a>
+                        </li>
+                        
+
+
+
+                    </ul>
+                </div>
+
+                <a class="navbar-brand mx-auto order-1 order-md-2 " href="/Home/Index"> <h1>Düş Sokağı</h1></a>
+
+                <div class="collapse navbar-collapse order-4 order-md-4" id="navbar">
+
+                    <ul class="navbar-nav ml-auto">
+                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/About">Hakkında</a>
+                        </li>
+                        @if (everNoteUser == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Login">Giriş</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Register">Üye Ol</a>
+                            </li>
+                        }
+                        else
+                        {
+
+                            <li class="nav-item dropdown">
+
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Toggle navigation">
+                                    @everNoteUser.UserName
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown02">
+
+                                    <a class="dropdown-item" href="@Url.Action("ShowProfile")">Profili göster</a>
+                                    <a class="dropdown-item" href="@Url.Action("EditProfile")">Düzenle</a>
+                                    <a class="dropdown-item" href="@Url.Action("DeleteProfile")" onclick="return confirm('Silmek İstediğinize Emin Misiniz??');">Sil</a>
+
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-danger" href="/Home/LogOut">Çıkış</a>
+                            </li>
+
+
+
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    @RenderBody()
+    
+    <div class="site-newsletter gizle">
+        <div class="container">
+            <div class="text-center">
+                <h3 class="h4 mb-2">Yeni Paylaşımlarımızdan Haberdar Olun..</h3>
+                <p class="text-muted">Aylık bültenimize katılın , yeni hikayeleri ve çekilişleri asla kaçırmayın.</p>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-9 col-md-7 col-lg-5 ml-auto mr-auto">
+                        <div class="input-group mb-3 mt-3">
+                            <input type="text" class="form-control" placeholder="Email address" aria-label="Email address">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="button">Abone Ol</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-instagram gizle">
+        <div class="action">
+            <a class="btn btn-light" href="#">
+                Instagramdan bizi takip edin
+            </a>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-sm-6">
+                <div class="row no-gutters">
+                    <div class="col-3">
+                        <a class="photo" href="#">
+                            <img class="img-fluid"  src="~/Images/Kitap2.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <a class="photo" href="#">
+                            <img class="img-fluid" src="~/Images/res1.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <a class="photo" href="#">
+                            <img class="img-fluid" src="~/Images/res5.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <a class="photo" href="#">
+                            <img class="img-fluid" src="~/Images/res9.jpg" alt="" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row no-gutters">
+                    <div class="col-3">
+                        <a class="photo" href="#">
+                            <img class="img-fluid" src="~/Images/Kitap1.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <a class="photo" href="#">
+                            <img class="img-fluid" src="~/Images/Kitap2.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <a class="photo" href="#">
+                            <img class="img-fluid" src="~/Images/Kitap3.jpg" alt="" />
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <a class="photo" href="#">
+                            <img class="img-fluid" src="~/Images/Kitap2.jpg" alt="" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer bg-darkest gizle" role="contentinfo">
+        <div class="container">
+
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Privacy policy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Terms</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Feedback</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Advertise</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="page-contact.html">Contact</a>
+                </li>
+            </ul>
+            <div class="copy">
+                &copy; MY BLog ~ 2019<br />
+                <p class=""> Tüm Hakları Saklıdır</p>
+                İzinsiz Kullanılamaz
+            </div>
+        </div>
+    </footer>
+    @*<script src="~/Scripts/bootstrap.min.js"></script>*@
+
+
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/app.js"></script>
+
+</body>
+</html>

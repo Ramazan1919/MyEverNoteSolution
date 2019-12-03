@@ -1,0 +1,84 @@
+﻿@using  MyEverNote.Entities.Messages
+@model MyEverNote.WEBUI.ViewModels.ErrorViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+
+
+
+
+<link href="~/Content/css/Login_Register.css" rel="stylesheet" />
+
+
+
+<section class="login-info">
+
+    <div class="container">
+        <div class="row main">
+            <div class="form-header">
+                <h4 class="text-center ">@Model.Header</h4>
+            </div>
+            <div class="main-content">
+
+
+                <div class="text-danger">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;@Model.Title </span>
+                    <hr />
+
+
+                    <p clas="text-justify">
+
+                        @foreach (ErrorMessageObject msg in Model.ıtems)
+                        {
+
+                            @msg.Message<br />
+                        }
+
+                    </p>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+
+@{
+
+    string js = string.Empty;
+
+    if (Model.IsRedirecting)
+    {
+
+        js = "setTimeout(function() {  window.location = '" + Model.RedirectingUrl + "';}, " + Model.RedirectingTimeOut + "); ";
+
+    }
+
+
+
+
+}
+
+
+<script>
+
+
+    $(function () {
+
+
+        $("footer").hide();
+        @Html.Raw(js);
+
+    })
+
+</script>
+
+
+
+

@@ -1,0 +1,62 @@
+﻿@using MyEverNote.Entities
+@model EverNoteUser 
+
+
+@{
+    ViewBag.Title = "Profiliniz";
+}
+
+
+<div class="container">
+
+    <div class="row">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-2">
+
+          
+            <img src="~/Images/@(Model.ProfileImageFilename)" class="img-circle" width="128" height="128" />
+        </div>
+
+        <div class="col-md-10">
+
+            <h3>@(Model.Name + "  " + Model.Surname)</h3>
+            <br />
+            <h6><b> UserName:</b>@Model.UserName</h6>
+            <h6><b> Email:</b>@Model.Email</h6>
+            <br />
+            <input  type="button" value="More" class="btn btn-default" id="dene" />
+            <h5 class="text-dark deneme" > @Model.ModifiedOn 
+            @Model.ModifiedUsername</h5>
+        </div>
+
+       
+
+    </div>
+
+
+</div>
+<script>
+
+
+    $(function () {
+        $(".deneme").hide();
+        $("#dene").click(function () {
+
+            $(".deneme").toggle("slow");
+
+
+        })
+
+      
+       
+
+
+    })
+
+</script>

@@ -1,0 +1,65 @@
+﻿@model MyEverNote.Entities.Note
+
+@{
+    ViewBag.Title = "Detaylar";
+}
+
+
+<div class="row">
+
+    <div class="col-md-2"></div>
+    <div class="col-md-7">
+        <br />
+        <br />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Category.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Text)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Text)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsDraft)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsDraft)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LikeCount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LikeCount)
+            </dd>
+
+           
+
+        </dl>
+        <p>
+            @Html.ActionLink("Düzenle", "Edit", new { id = Model.Id },new { @class="btn btn-info"}) |
+            @Html.ActionLink("Not Listesine Dön", "Index",null, new { @class = "btn btn-success" })
+        </p>
+    </div>
+    
+</div>
+

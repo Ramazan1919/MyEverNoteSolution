@@ -1,0 +1,95 @@
+﻿
+@using MyEverNote.Entities
+@model IEnumerable<MyEverNote.Entities.Note>
+@{
+    ViewBag.Title = "Notlar";
+}
+
+
+
+<div class="row">
+
+    <div class="col-md-2"></div>
+    <div class="col-md-7 ">
+        <br />
+        <p class="text-center">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+        </p>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Text)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsDraft)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LikeCount)
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (Note item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @if (string.IsNullOrEmpty(item.Text) == false && item.Text.Length > 275)
+                        {
+                            <div class="card-text">
+
+                                <p class="text-black pull-left" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size:18px;"> @(item.Text.Substring(0, 275) + ".....")</p>
+
+                            </div>
+
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsDraft)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LikeCount)
+                    </td>
+
+                    <td>
+
+
+                        <button class="btn btn-secondary  " data-toggle="modal" data-target="#modal_comment" data-note-id="@item.Id">
+
+                            Yorumlar
+                        </button>
+
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+
+
+@Bootsrap.Model(id: "modal_comment", title: "Yorumlar")
+
+
+
+<script src="~/Scripts/jquery.js"></script> "
+"58*-7
+<script src="~/Scripts/Comment.js"></script>

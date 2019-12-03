@@ -1,0 +1,238 @@
+﻿@using MyEverNote.WEBUI.Models
+@using MyEverNote.Entities
+@model IEnumerable<MyEverNote.Entities.Note>
+
+    @{
+    ViewBag.Title = "Index";
+    }
+
+    @{
+
+    EverNoteUser user = CurrentSession.CurrentUser;
+    }
+<link href="~/Content/css/css/woocommerce.css" rel="stylesheet" />
+
+        @*ANASAYFADALİ NOTLARI GÖSRENE INDEX*@
+    <div class="container">
+        <div class="row">
+            <!-- Yazılar-->
+                <main class="main pt-4" role="main"  ">
+
+                    <div class="container">
+
+                        <div class="row">
+                            
+                            
+                                    <div class="col-md-9 ml-auto" >
+                                        
+                                        <article class="card mb-3 " >
+
+                                            @foreach (Note note in Model)
+
+                                            {
+                                                <div class="row no-gutters ">
+                                                    <div class="col-md-4 base contain"   >
+                                                        <a href="/Notes/ShowNotes/@note.Id" >
+                                                            <img class="card-img" style="height:450px; width:450px;" src="~/Images/@note.NoteImageFilename" alt="" />
+
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-8 "  >
+                                                        <div class="card-header text-md-left text-capitalize ">
+                                                            <div class="card mb-2" style="max-width:358px; ">
+                                                                <div class="row no-gutters">
+
+                                                                    <div class="col-md-8">
+
+                                                                        <div class="card-title text-md-left text-capitalize" style="font-size:23px;font-style:oblique; width:300px; margin-right:10px; font-weight:bold; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;">
+
+                                                                            <p class="text-black pull-right"><bold>@note.Title</bold></p>
+
+                                                                        </div>
+                                                                        <div class="small" style="margin-left:140px;">
+                                                                            <a href="#"><time class="timeago" datetime="2017-10-26 20:00">@note.CreatedOn</time></a>
+                                                                            <br />
+                                                                            <span>Yazan Kişi  <p class="text-danger" style="font-size:15px;"> @note.Owner.UserName </p> </span>
+                                                                        </div>
+                                                                      
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="card-body ">
+                                                                    @if (string.IsNullOrEmpty(note.Text) == false && note.Text.Length > 200)
+                                                                    {
+                                                                        <div class="card-text ">
+                                                                            <aside class="sidebar sidebar-sticky" style=" font-size:20px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                                                                <a class="text-black pull-left body_hover" href="/Notes/ShowNotes/@note.Id">
+                                                                                    <p style="padding-left:25px; width:335px;">
+                                                                                        @(note.Text.Substring(0, 200) + ".....")
+                                                                                    </p>
+                                                                                </a>
+                                                                            </aside>
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {<aside class="sidebar" >
+                                                                            <a class="card-text text-right pull-right body_hover" href="/Notes/ShowNotes/@note.Id" style=" font-size:20px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                                                                <p>@note.Text</p>
+                                                                            </a>
+                                                                        </aside>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                </div>
+                                                <br />
+                                                <br />
+                                            }
+                                        </article><!-- /.card -->
+
+                                    </div>
+                              
+                           
+
+
+
+
+
+                            <div class="col-md-3 ml-auto">
+
+                                <aside class="sidebar">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Hakkımızda</h4>
+                                            <p class="card-text">Sizleri doğru bilgiye daha kolay ulaşılabilir hale getirmek ve düşüncelerimizi sizlerle paylaşmak yegane amacımızdır. </p>
+                                        </div>
+                                    </div><!-- /.card -->
+                                </aside>
+
+                                <aside class="sidebar sidebar-sticky">
+                                  
+
+
+                                    @Html.Partial("_PartialCategories")
+
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Popüler Hikayeler</h4>
+
+                                            @foreach (Note note in Model)
+                                            {
+                                                if (note.LikeCount > 2)
+                                                {
+                                                    <h4 class="h6">@note.Title</h4>
+                                                    <a href="/Notes/ShowNotes/@note.Id"  class="d-inline-block">
+                                                        <img class="card-img" src="~/Images/@note.NoteImageFilename" alt="" />
+                                                    </a>
+                                                }
+
+                                            }
+
+
+
+                                            @*<a href="post-image.html" class="d-inline-block">
+                                                <h4 class="h6">The blind man</h4>
+                                                <img class="card-img" src="img/articles/2.jpg" alt="" />
+                                            </a>
+                                            <time class="timeago" datetime="2017-10-03 20:00">3 october 2017</time> in Lifestyle*@
+
+                                          
+
+                                        </div>
+                                    </div><!-- /.card -->
+                                </aside>
+
+                            </div>
+                        </div>
+                        </div>
+
+                    </main>
+               
+
+
+
+            @*<div class="row">*@
+
+
+            @*@foreach (Note note in Model)
+                {
+
+                    <div class="col-sm-4 col-lg-4 col-md-4" data-note-id="@note.Id">
+                        <div class="thumbnail">
+                            <img src="~/Images/res5.jpg" alt="@note.Title" />
+
+
+                            <div class="caption text-black-50 text-decoration-none">
+                                <h4>
+                                    <a class="modal_renk" data-toggle="modal" data-target="#modal_NoteText" data-note-id="@note.Id">
+                                        @note.Title
+                                    </a>
+                                </h4>
+                                <p>
+
+                                    @if (string.IsNullOrEmpty(note.Text) == false && note.Text.Length > 100)
+                                    {
+                                    <p> @(note.Text.Substring(0, 100) + ".....")</p>
+                                    <p class="pull-right">
+                                        <button class="btn btn-success " data-toggle="modal" data-target="#modal_NoteText" data-note-id="@note.Id"><span class="glyphicon glyphicon-chevron-right"></span>Devamı </button>
+                                    </p>
+                                }
+                                else
+                                {
+                                    @note.Text
+                                }
+                                    </p>
+                                    <h6>
+                                        <span class="glyphicon glyphicon-time ">
+                                            @note.ModifiedOn.ToString("dd.MM.yy" +
+                                           "HH")
+                                        </span><br />
+                                        <span class="glyphicon glyphicon-user "></span>@note.Owner.UserName
+                                    </h6>
+                                    <p></p>
+                                </div>
+                                <div class="ratings">
+                                    <p class="pull-right">
+                                        <button class="btn btn-info" value="" data-toggle="modal" data-target="#modal_comment" data-note-id="@note.Id">
+                                            <span class="glyphicon glyphicon-comment"> </span> Yorumlar  <span class=" badge badge-pill badge-warning">@note.Comments.Count </span>
+
+                                        </button>
+                                    </p>
+
+                                    <p>
+                                        @if (user != null)
+                                        {
+                                            <button class="btn btn-default" data-liked="false" data-note-id="@note.Id">
+                                                <span class="glyphicon glyphicon-star-empty like-star"></span>&nbsp; <span class="like-count">@note.LikeCount </span>
+                                            </button>
+                                        }
+
+
+
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }*@
+
+
+            @*</div>*@
+        </div>
+    </div>
+    </div>
+
+
+    @Bootsrap.Model(id: "modal_comment", title: "Yorumlar")
+  
+
+
+    <script src="~/Scripts/Comment.js"></script>
+    <script src="~/Scripts/Liked.js"></script>
+    <script src="~/Scripts/Note.js"></script>

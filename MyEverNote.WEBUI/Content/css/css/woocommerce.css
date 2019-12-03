@@ -1,0 +1,12 @@
+﻿
+
+
+.body_hover{
+
+    color:black
+}
+.body_hover :hover {
+    color:chocolate;
+    
+  transition:1s;
+}

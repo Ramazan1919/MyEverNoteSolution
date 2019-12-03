@@ -1,0 +1,246 @@
+﻿@using MyEverNote.Entities
+@using MyEverNote.WEBUI.Models
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Shop Homepage - Start Bootstrap Template</title>
+    <!-- Bootstrap Core CSS -->
+
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+
+    <link href="~/Content/css/shop-homepage.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    @{
+
+        EverNoteUser everNoteUser = CurrentSession.CurrentUser;
+    }
+
+    <!-- Navigation -->
+
+    <div class="container">
+        <nav class="navbar   navclass">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Menü</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand ana" href="/Home/Index">Senin Makalen</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse ramo" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+                    @if (everNoteUser != null)
+                    {
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/Note/MyNotes" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-wrench"></span><bold>Yönetim</bold><span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                <li>
+                                    <a href="/Notes/Create" class="glyphicon glyphicon-plus"><span>Not Ekle </span></a>
+                                </li>
+
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="/Notes/Index" class="glyphicon glyphicon-th-list"><span>Notlarm </span></a>
+                                </li>
+
+                                <li>
+                                    <a href="/Note/MyLikedNotes" class="glyphicon glyphicon-th-list"><span>Beğendiklerim </span></a>
+                                </li>
+                                @if (everNoteUser.IsAdmın)
+                                {
+                                    <li role="separator" class="divider"></li>
+
+
+                                    <li>
+                                        <a href="/Categories/Create" class="glyphicon glyphicon-th-list"><span>Kategori Ekle </span></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/Categories/Index" class="glyphicon glyphicon-th-list"><span>Kategoriler </span></a>
+                                    </li>
+
+
+
+                                    <li role="separator" class="divider"></li>
+
+
+                                    <li>
+                                        <a href="/EverNoteUser/Create" class="glyphicon glyphicon-th-list"><span>Kullanıcı Ekle </span></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/EverNoteUser/Index" class="glyphicon glyphicon-th-list"><span>Kullanıcılar </span></a>
+                                    </li>
+
+
+
+                                }
+
+                            </ul>
+                        </li>
+
+                    }
+
+
+                    <li>
+                        <a href="/Home/MostLiked">
+                            <span class="glyphicon glyphicon-heart"></span><bold>En Beğenilenler</bold>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Home/Index">
+                            <span class="glyphicon glyphicon-bookmark"></span><bold>Son Yazılanlar</bold>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Home/About">
+                            <span class="glyphicon glyphicon-info-sign"></span><bold>Hakkında</bold>
+                        </a>
+                    </li>
+
+
+                </ul>
+
+                <ul class="nav  navbar-nav navbar-right">
+                    @if (everNoteUser == null)
+                    {
+
+                        <li>
+                            <a href="/Home/Login">
+                                <span class="glyphicon glyphicon-log-in">Giriş</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Home/Register">
+                                <span class="glyphicon glyphicon-user">Üye Ol</span>
+                            </a>
+                        </li>
+
+                    }
+                    else
+                    {
+
+
+                        <li class="dropdown">
+
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="/Home/ShowProfile" aria-haspopup="true"
+                               aria-expanded="false">
+
+                                <span class="glyphicon glyphicon-user">@everNoteUser.UserName</span><span class="icon-cog icon-white "></span><span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("ShowProfile")"> <span class="glyphicon glyphicon-edit">&nbsp;</span>Profili Göster</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="@Url.Action("EditProfile")"> <span class="glyphicon glyphicon-edit">&nbsp;</span>Düzenle</a></li>
+                                <li><a href="@Url.Action("DeleteProfile")" onclick="return confirm('Silmek İstediğinize Emin Misiniz??');"><span class="glyphicon glyphicon-trash">&nbsp;</span>Sil</a></li>
+                            </ul>
+
+
+                        </li>
+
+
+                        <li>
+                            <a href="/Home/LogOut">
+                                <span class="glyphicon glyphicon-log-out">Çıkış</span>
+                            </a>
+                        </li>
+
+                    }
+
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+    </nav>
+    @RenderBody()
+    <div class="container">
+        <hr>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-4 text-center">
+                    <h4>
+                        Site Haritası
+                    </h4>
+
+                    <ul class="list-group ">
+
+
+                        <li class="list-group-item">
+                            <p>
+                                <span class="glyphicon glyphicon-info-sign"></span> <a href="#"> Hakkımızda</a>
+                            </p>
+                        </li>
+
+                        <li class="list-group-item">
+                            <p>
+                                <span class="glyphicon glyphicon-star-empty"></span> <a href="/Home/MostLiked"> En Beğenilenler</a>
+                            </p>
+                        </li>
+
+                        <li class="list-group-item">
+                            <p>
+                                <span class="glyphicon glyphicon-align-left"></span> <a href="/Home/Index"> ESon Yazılar</a>
+                            </p>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="col-lg-4 text-center">
+                    <br />
+                    <h4>İlim ve fen nerede ise oradan alacağız ve her fer-i milletin kafasına koyacağız.</h4>
+                    <h3>Atatürk</h3>
+
+                    <br />
+                    <br />
+                    <br />
+                    <hr />
+                    <p>Tüm Hakları Saklıdır &copy; @DateTime.Now.Year</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <h4>E-Bülten Üyeliği</h4>
+                    <hr />
+                    <h5>Gelişmelerden haberdar olmak için ...</h5>
+
+                    <input type="text" placeholder="E-Posta Giriniz..." class="form-control" style="width:300px;margin-left:65px;" />
+                    <br />
+
+                    <input type="submit" class="btn btn-danger" value="Gönder" />
+
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- /.container -->
+
+</body>
+</html>
+
